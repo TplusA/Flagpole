@@ -1,10 +1,8 @@
 .PHONY: all clean
 
-DEPENDENCIES = glib-2.0 gobject-2.0 gupnp-1.0
-
-CC = gcc
-
 ifeq ($(CFLAGS),)
+DEPENDENCIES = glib-2.0 gobject-2.0 gupnp-1.0
+CC = gcc
 CFLAGS = -pipe -O3 -std=c11 -Wall -Wsign-compare -Wuninitialized -Winit-self -Wunused-but-set-parameter -Wunused-function -Wundef -Wshadow -Wpointer-arith -Wfloat-equal -Wwrite-strings -Wstrict-aliasing -Wdouble-promotion -Wunused -Waggregate-return -Wbad-function-cast -Wnested-externs -Wmissing-prototypes -Wstrict-prototypes
 CFLAGS += `pkg-config --cflags-only-other $(DEPENDENCIES)`
 CPPFLAGS += `pkg-config --cflags-only-I $(DEPENDENCIES)`
