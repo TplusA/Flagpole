@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     }
 
     GError *error = NULL;
-    GUPnPContext *context = gupnp_context_new(NULL, "eth1", 0, &error);
+    GUPnPContext *context = gupnp_context_new(NULL, NULL, 0, &error);
 
     if(error)
     {
