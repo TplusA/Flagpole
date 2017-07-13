@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2017  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of Flagpole.
  *
@@ -18,6 +18,19 @@
 
 #include <libgupnp/gupnp.h>
 #include <stdlib.h>
+
+static void redirect_request(SoupServer *server, SoupMessage *msg,
+                             const char *path, GHashTable *query,
+                             SoupClientContext *client, gpointer user_data)
+{
+    GUPnPContext *context = user_data;
+
+    char buffer[4096];
+    snprintf(buffer, sizeof(buffer),
+             "http://%s%s", gupnp_context_get_host_ip(context), path);
+
+    soup_message_set_redirect(msg, SOUP_STATUS_MOVED_PERMANENTLY, buffer);
+}
 
 struct DeviceData
 {
@@ -39,6 +52,9 @@ static void context_available(GUPnPContextManager *context_manager,
     {
         fprintf(stderr, "Announcing UPnP root device on %s\n",
                 gupnp_context_get_host_ip(context));
+
+        soup_server_add_handler(gupnp_context_get_server(context),
+                                NULL, redirect_request, context, NULL);
 
         gupnp_root_device_set_available(dev, TRUE);
         gupnp_context_manager_manage_root_device(context_manager, dev);
