@@ -1,3 +1,11 @@
+2017-07-13  Robert Tiemann  <r.tiemann@ta-hifi.de>
+
+	* Version 0.2 released.
+
+	* Web server: Redirect all HTTP requests on UPnP server port to the
+	  local web server. This allows relative links to icons and other
+	  stuff be served by a proper web server, not by us.
+
 2015-10-01  Robert Tiemann  <r.tiemann@ta-hifi.de>
 
 	* Version 0.1 released.
