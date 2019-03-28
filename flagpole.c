@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2017  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2017, 2019  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of Flagpole.
  *
@@ -58,6 +58,8 @@ static void context_available(GUPnPContextManager *context_manager,
 
         gupnp_root_device_set_available(dev, TRUE);
         gupnp_context_manager_manage_root_device(context_manager, dev);
+
+        g_object_unref(dev);
     }
 }
 
