@@ -1,3 +1,11 @@
+2019-03-28  Robert Tiemann  <r.tiemann@ta-hifi.de>
+
+	* Version 1.0 released.
+
+	* Fix: Avoid file descriptor and memory leak. Frequent network
+	  reconfigurations can exhaust the number of available file
+	  descriptors, making our device undiscoverable on the network.
+
 2017-07-13  Robert Tiemann  <r.tiemann@ta-hifi.de>
 
 	* Version 0.2 released.
@@ -13,4 +21,4 @@
 	* First release for testing.
 
 
-Copyright 2015 T+A elektroakustik GmbH & Co. KG
+Copyright 2015, 2017, 2019 T+A elektroakustik GmbH & Co. KG
