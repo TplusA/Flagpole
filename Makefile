@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015, 2017  T+A elektroakustik GmbH & Co. KG
+# Copyright (C) 2015, 2017, 2019  T+A elektroakustik GmbH & Co. KG
 #
 # This file is part of Flagpole.
 #
@@ -19,14 +19,15 @@
 .PHONY: all clean
 
 ifeq ($(CFLAGS),)
-DEPENDENCIES = glib-2.0 gobject-2.0 gupnp-1.0 libsoup-2.4
 CC = gcc
 CFLAGS = -pipe -O3 -std=c11 -Wall -Wsign-compare -Wuninitialized -Winit-self -Wunused-but-set-parameter -Wunused-function -Wundef -Wshadow -Wpointer-arith -Wfloat-equal -Wwrite-strings -Wstrict-aliasing -Wdouble-promotion -Wunused -Waggregate-return -Wbad-function-cast -Wnested-externs -Wmissing-prototypes -Wstrict-prototypes
+endif
+
+DEPENDENCIES = glib-2.0 gobject-2.0 gupnp-1.0 libsoup-2.4
 CFLAGS += `pkg-config --cflags-only-other $(DEPENDENCIES)`
 CPPFLAGS += `pkg-config --cflags-only-I $(DEPENDENCIES)`
 LDFLAGS += `pkg-config --libs-only-L $(DEPENDENCIES)`
 LDLIBS += `pkg-config --libs-only-l --libs-only-other $(DEPENDENCIES)`
-endif
 
 all: flagpole
 
