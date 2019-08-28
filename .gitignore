@@ -1,2 +1,7 @@
 /flagpole
 /*.o
+/GPATH
+/GRTAGS
+/GTAGS
+/tags
+/types_c.taghl
