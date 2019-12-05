@@ -37,5 +37,6 @@ all: flagpole
 clean:
 	rm -f *.o
 	rm -f flagpole
+	rm -f GPATH GRTAGS GTAGS tags types_c.taghl
 
 flagpole: flagpole.o
