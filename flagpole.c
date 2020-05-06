@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2017, 2019  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2017, 2019, 2020  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of Flagpole.
  *
@@ -30,7 +30,8 @@ static void redirect_request(SoupServer *server, SoupMessage *msg,
 
     char buffer[4096];
     snprintf(buffer, sizeof(buffer),
-             "http://%s%s", gupnp_context_get_host_ip(context), path);
+             "http://%s%s",
+             gssdp_client_get_host_ip(GSSDP_CLIENT(context)), path);
 
     soup_message_set_redirect(msg, SOUP_STATUS_MOVED_PERMANENTLY, buffer);
 }
@@ -46,15 +47,24 @@ static void context_available(GUPnPContextManager *context_manager,
 {
     const struct DeviceData *data = user_data;
 
+    GError *error = NULL;
     GUPnPRootDevice *dev =
-        gupnp_root_device_new(context, data->rootxml_file, data->xml_dir);
+        gupnp_root_device_new(context, data->rootxml_file, data->xml_dir,
+                              &error);
 
     if(dev == NULL)
+    {
         fprintf(stderr, "Failed creating UPnP root device\n");
+
+        if(error != NULL)
+            fprintf(stderr, "Error %s, %d: %s",
+                    g_quark_to_string(error->domain), error->code,
+                    error->message);
+    }
     else
     {
         fprintf(stderr, "Announcing UPnP root device on %s\n",
-                gupnp_context_get_host_ip(context));
+                gssdp_client_get_host_ip(GSSDP_CLIENT(context)));
 
         soup_server_add_handler(gupnp_context_get_server(context),
                                 NULL, redirect_request, context, NULL);
