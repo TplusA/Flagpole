@@ -1,6 +1,12 @@
+2023-03-24  Robert Tiemann  <r.tiemann@ta-hifi.de>
+
+	* Version 1.3 released.
+
+	* Misc: Maintenance work.
+
 2020-06-05  Robert Tiemann  <r.tiemann@ta-hifi.de>
 
-	* Version 2.0 released.
+	* Version 1.2 released.
 
 	* Maintenance: Use libgupnp 1.2 instead of libgupnp 1.0.
 
@@ -35,4 +41,4 @@
 	* First release for testing.
 
 
-Copyright 2015, 2017, 2019, 2020 T+A elektroakustik GmbH & Co. KG
+Copyright 2015, 2017, 2019, 2020, 2023 T+A elektroakustik GmbH & Co. KG
